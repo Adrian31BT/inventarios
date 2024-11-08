@@ -1,0 +1,5 @@
+INDEX VERSION 1.4+C:\Users\USER A1\Desktop\Programacion-Adrian\M3-KraveDev\inventarios\java\.metadata\.plugins\org.eclipse.wst.jsdt.core\indexes
+190693294.index
+2070185479.index
+414227741.index
+4102352630.index

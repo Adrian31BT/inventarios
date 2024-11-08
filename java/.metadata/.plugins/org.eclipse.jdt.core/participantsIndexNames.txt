@@ -1,0 +1,5 @@
+INDEX VERSION 1.134
+C:\Users\USER A1\Desktop\Programacion-Adrian\M3-KraveDev\java\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\1012163473.index
+\inventarios\src\main\java
+C:\Users\USER A1\Desktop\Programacion-Adrian\M3-KraveDev\java\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\1231821221.index
+\inventario\src\main\java
