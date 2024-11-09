@@ -184,4 +184,12 @@ select * from cabecera_ventas;
 select * from detalle_ventas;
 select * from historial_stock;
 
+select prod.codigo_pro, prod.nombre as nombre_producto,
+udm.codigo_udm as nombre_udm, udm.descripcion as descripcion_udm,
+cast(prod.precio_venta as decimal(6,2)), prod.tiene_iva, cast(prod.coste as decimal(6,2)),
+prod.categoria, cat.nombre as nombre_categoria, prod.stock
+from productos prod, unidades_medida udm, categorias cat
+where prod.udm = udm.codigo_udm
+and prod.categoria = cat.codigo_cat
+and upper(prod.nombre) like '%M%';
 

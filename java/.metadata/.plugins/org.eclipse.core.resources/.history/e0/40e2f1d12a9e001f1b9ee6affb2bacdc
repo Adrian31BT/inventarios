@@ -1,0 +1,14 @@
+package com.krakedev.inventarios.entidades;
+
+import java.math.BigDecimal;
+
+public class Producto {
+	private int codigo_pro;
+	private String nombre;
+	private UnidadesMedida udm;
+	private BigDecimal precio_venta;
+	private boolean tiene_iva;
+	private BigDecimal coste;
+	private Categorias categoria;
+	private int stock;
+}	
