@@ -1,0 +1,36 @@
+package com.krakedev.inventarios.utils;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
+import com.krakedev.inventarios.excepciones.KrakeDevException;
+
+
+public class Convertidor {
+	private static final String FORMATO_FECHA = "yyyy/MM/dd hh:mm:ss";
+	private static final String FORMATO_HORA = "hh:mm";
+
+	
+	public static Date convertirFecha(String fechaStr) throws KrakeDevException {
+		SimpleDateFormat sdf = new SimpleDateFormat(FORMATO_FECHA);
+		Date fechaDate = null;
+		try {
+			fechaDate = sdf.parse(fechaStr);
+		} catch (ParseException e) {
+			throw new KrakeDevException("La fecha no tiene el formato correcto"+fechaStr);
+		}
+		return fechaDate;
+	}
+	
+	public static Date convertirHora(String horaStr) throws KrakeDevException {
+		SimpleDateFormat sdf = new SimpleDateFormat(FORMATO_HORA);
+		Date horaDate = null;
+		try {
+			horaDate = sdf.parse(horaStr);
+		} catch (ParseException e) {
+			throw new KrakeDevException("La hora no tiene el formato correcto: "+horaStr);
+		}
+		return horaDate;
+	}
+}

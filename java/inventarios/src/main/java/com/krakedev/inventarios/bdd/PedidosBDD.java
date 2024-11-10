@@ -6,6 +6,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.sql.Timestamp;
+
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -13,6 +15,7 @@ import com.krakedev.inventarios.entidades.DetallePedido;
 import com.krakedev.inventarios.entidades.Pedido;
 import com.krakedev.inventarios.excepciones.KrakeDevException;
 import com.krakedev.inventarios.utils.ConexionBDD;
+
 
 public class PedidosBDD {
 	public void insertar(Pedido pedido) throws KrakeDevException{
@@ -76,6 +79,7 @@ public class PedidosBDD {
 		Connection con = null; 
 		PreparedStatement ps = null;
 		PreparedStatement psDetalle = null;
+		PreparedStatement psHStock = null;
 		try {
 			con = ConexionBDD.obtenerConexion();
 			ps = con.prepareStatement("update cabecera_pedido set estado = ? where numero_cab = ?");
@@ -96,8 +100,19 @@ public class PedidosBDD {
 				BigDecimal subtotal = pv.multiply(cantidad);
 				psDetalle.setBigDecimal(2, subtotal);
 				psDetalle.setInt(3, det.getCodigo_dp());
-				
 				psDetalle.executeUpdate();
+				
+				Date fechaActual = new Date();
+				Timestamp fechaHora = new Timestamp(fechaActual.getTime());
+				
+				psHStock = con.prepareStatement("insert into historial_stock (fecha, referencia, producto, cantidad) values (?, ?, ?, ?)");
+				psHStock.setTimestamp(1, fechaHora);
+				String referencia = "Pedido "+pedido.getNumero_cab();
+				psHStock.setString(2, referencia);
+				psHStock.setInt(3, det.getProducto().getCodigo_pro());
+				psHStock.setInt(4, det.getCantidad_recibida());
+				
+				psHStock.executeUpdate();
 			}
 			
 		} catch (SQLException e) {
