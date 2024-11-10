@@ -1,0 +1,12 @@
+package com.krakedev.inventarios.entidades;
+
+import java.util.Date;
+
+public class Pedido {
+	private int numero_cab;
+	private Proveedor proveedor;
+	private Date fecha;
+	private EstadoPedido estado;
+	
+	
+}
