@@ -36,5 +36,4 @@ INDEX VERSION 1.134+C:\Users\USER A1\Desktop\Programacion-Adrian\M3-KraveDev\inv
 2846110339.index
 4284218489.index
 1780844982.index
-4287672536.index
 1023014014.index
