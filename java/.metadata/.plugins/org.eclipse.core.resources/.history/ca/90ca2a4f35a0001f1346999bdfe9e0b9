@@ -1,0 +1,19 @@
+package com.krakedev.inventarios.entidades;
+
+import java.math.BigDecimal;
+
+public class DetalleVenta {
+	private int codigo_det;
+	private Venta cabecera_ventas;
+	private Producto producto;
+	private int cantidad;
+	private BigDecimal precio_venta;
+	private BigDecimal subtotal;
+	private BigDecimal total_con_iva;
+	
+	public DetalleVenta() {
+		super();
+	}
+	
+	
+}

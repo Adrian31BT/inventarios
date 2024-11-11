@@ -105,7 +105,7 @@ insert into estados_pedido (codigo_est , descripcion) values('R', 'Recibido');
 create table cabecera_pedido(
 	numero_cab serial not null,
 	proveedor varchar(13) not null,
-	fecha timestamp not null,
+	fecha date not null,
 	estado char(1) not null,
 	constraint cabecera_pedido_pk primary key (numero_cab),
 	constraint proveedor_fk foreign key (proveedor) references proveedores(identificador),
