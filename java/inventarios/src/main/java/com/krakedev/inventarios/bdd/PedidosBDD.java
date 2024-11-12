@@ -170,10 +170,7 @@ public class PedidosBDD {
 					String descripcion = rs2.getString("descripcion");
 					estadoPedido = new EstadoPedido(codigo_est, descripcion);	
 				}
-				
-				
-				
-				
+					
 				pedido = new Pedido();
 				pedido.setNumero_cab(numero_cab);
 				

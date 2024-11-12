@@ -74,47 +74,7 @@ public class CategoriasBDD {
 		}
 	}
 	
-	public ArrayList<Categorias> recuperar() throws KrakeDevException{
-		ArrayList<Categorias> categorias = new ArrayList<Categorias>();
-		Connection con = null; 
-		PreparedStatement ps = null;
-		ResultSet rs = null;
-		Categorias categoria = null;
-		Categorias categoriaPadre = null;
-		
-		
-		try {
-			con = ConexionBDD.obtenerConexion();
-			ps = con.prepareStatement("select * from categorias");
-			rs = ps.executeQuery();
-			
-			while(rs.next()) {
-				int codigo_cat = rs.getInt("codigo_cat");
-				String nombre = rs.getString("nombre");
-				
-				
-				if(rs.getObject("categoria_padre") != null) {
-					CategoriasBDD categoriasBDD = new CategoriasBDD();
-					categoriaPadre = categoriasBDD.recuperarPorCodigo(codigo_cat);
-					categoriaPadre = new Categorias(categoriaPadre.getCodigo_cat(), categoriaPadre.getNombre(), categoriaPadre.getCategoria_padre());
-				}else {
-					categoriaPadre = null;
-				}
-				
-				categoria = new Categorias(codigo_cat, nombre, categoriaPadre);
-				categorias.add(categoria);			
-			}
-			
-		} catch (KrakeDevException e) {
-			e.printStackTrace();
-			throw e;
-		} catch (SQLException e) {
-			e.printStackTrace();
-			throw new KrakeDevException("Error al consultar categorias, detalle: "+e.getMessage());
-		}
-		
-		return categorias;
-	}
+	
 	
 	public Categorias recuperarPorCodigo(int codCat) throws KrakeDevException{
 
@@ -122,30 +82,24 @@ public class CategoriasBDD {
 		PreparedStatement ps = null;
 		ResultSet rs = null;
 		Categorias categoria = null;
-		Categorias categoriaPadre = null;
 		
-
 		try {
 			con = ConexionBDD.obtenerConexion();
-			ps = con.prepareStatement("select * from categorias where codigo_cat = ?");
+			ps = con.prepareStatement("select codigo_cat, nombre, categoria_padre from categorias where codigo_cat = ?");
 			ps.setInt(1, codCat);
-			rs = ps.executeQuery();
-			
+			rs = ps.executeQuery();		
 			if(rs.next()) {
+				
 				int codigo_cat = rs.getInt("codigo_cat");
 				String nombre = rs.getString("nombre");
-				
-				
+				Categorias categoriaPadre = null;
+							
 				if(rs.getObject("categoria_padre") != null) {
-					CategoriasBDD categoriasBDD = new CategoriasBDD();
-					categoriaPadre = categoriasBDD.recuperarPorCodigo(codigo_cat);
-					categoriaPadre = new Categorias(categoriaPadre.getCodigo_cat(), categoriaPadre.getNombre(), categoriaPadre.getCategoria_padre());
-				}else {
-					categoriaPadre = null;
+					int codCatPadre = rs.getInt("categoria_padre");
+					categoriaPadre = recuperarPorCodigo(codCatPadre);
 				}
 				
 				categoria = new Categorias(codigo_cat, nombre, categoriaPadre);
-				
 			}
 			
 		} catch (KrakeDevException e) {
@@ -157,5 +111,44 @@ public class CategoriasBDD {
 		}
 		
 		return categoria;
+	}
+	
+	public ArrayList<Categorias> recuperar() throws KrakeDevException{
+
+		Connection con = null; 
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		Categorias categoria = null;
+		ArrayList<Categorias> categorias = new ArrayList<Categorias>();
+		
+		try {
+			con = ConexionBDD.obtenerConexion();
+			ps = con.prepareStatement("select codigo_cat, nombre, categoria_padre from categorias");
+			rs = ps.executeQuery();		
+			while(rs.next()) {
+				
+				int codigo_cat = rs.getInt("codigo_cat");
+				String nombre = rs.getString("nombre");
+				Categorias categoriaPadre = null;
+							
+				if(rs.getObject("categoria_padre") != null) {
+					int codCatPadre = rs.getInt("categoria_padre");
+					categoriaPadre = recuperarPorCodigo(codCatPadre);
+				}
+				
+				categoria = new Categorias(codigo_cat, nombre, categoriaPadre);
+
+				categorias.add(categoria);
+			}
+			
+		} catch (KrakeDevException e) {
+			e.printStackTrace();
+			throw e;
+		} catch (SQLException e) {
+			e.printStackTrace();
+			throw new KrakeDevException("Error al consultar categorias, detalle: "+e.getMessage());
+		}
+		
+		return categorias;
 	}
 }
