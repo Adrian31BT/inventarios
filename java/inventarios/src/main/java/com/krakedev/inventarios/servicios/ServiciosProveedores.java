@@ -45,4 +45,19 @@ public class ServiciosProveedores {
 			return Response.serverError().build();
 		}
 	}
+	
+	@Path("buscarPorIdentificador/{identificador}")
+	@GET
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response buscarPorIdentificador(@PathParam("identificador") String identificador){
+		ProveedoresBDD proveedoresBDD = new ProveedoresBDD();
+		Proveedor proveedores = null;
+		try {
+			proveedores = proveedoresBDD.buscarPorIdentificador(identificador);
+			return Response.ok(proveedores).build();
+		} catch (KrakeDevException e) {
+			e.printStackTrace();
+			return Response.serverError().build();
+		}	
+	}
 }

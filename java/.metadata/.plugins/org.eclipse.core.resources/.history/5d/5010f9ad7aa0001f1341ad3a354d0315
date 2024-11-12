@@ -1,0 +1,74 @@
+package com.krakedev.inventarios.bdd;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+import com.krakedev.inventarios.entidades.Categorias;
+import com.krakedev.inventarios.excepciones.KrakeDevException;
+import com.krakedev.inventarios.utils.ConexionBDD;
+
+public class CategoriasBDD {
+	
+	
+	public void insertar(Categorias categoria) throws KrakeDevException{
+		Connection con = null; 
+		PreparedStatement ps = null;
+	
+		try {
+			con = ConexionBDD.obtenerConexion();
+			ps = con.prepareStatement("insert into categorias(nombre, categoria_padre) values (?,?)");
+			ps.setString(1, categoria.getNombre());
+			
+			if(categoria.getCategoria_padre() == null){
+				ps.setNull(2, java.sql.Types.NULL);
+			}else {
+				ps.setInt(2, categoria.getCategoria_padre().getCodigo_cat());
+			}
+			
+			ps.executeUpdate();
+		} catch (SQLException e) {
+			throw new KrakeDevException("Error al insertar categoria, detalle: "+e.getMessage());
+		} catch (KrakeDevException e) {
+			throw e;
+		} finally{
+			if(con != null){
+				try {
+					con.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+	}
+	
+	public void actualizar(Categorias categoria) throws KrakeDevException{
+		Connection con = null; 
+		PreparedStatement ps = null;
+	
+		try {
+			con = ConexionBDD.obtenerConexion();
+			ps = con.prepareStatement("update categorias set nombre = ?, categoria_padre = ? where codigo_cat = ?");
+			
+			ps.setString(1, categoria.getNombre());
+			if(categoria.getCategoria_padre() == null){
+				ps.setNull(2, java.sql.Types.NULL);
+			}else {
+				ps.setInt(2, categoria.getCategoria_padre().getCodigo_cat());
+			}
+			ps.setInt(3, categoria.getCodigo_cat());
+			ps.executeUpdate();
+		} catch (SQLException e) {
+			throw new KrakeDevException("Error al actualizar categoria, detalle: "+e.getMessage());
+		} catch (KrakeDevException e) {
+			throw e;
+		} finally{
+			if(con != null){
+				try {
+					con.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+	}
+}
