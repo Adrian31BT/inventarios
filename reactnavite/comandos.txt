@@ -1,0 +1,7 @@
+npx create-expo-app@latest MiPrimerProyecto
+npx create-expo-app@latest MiPrimerProyecto --template blank@latest
+
+cd MiPrimerProyecto
+npx create-expo-app MiPrimerProyecto
+npm run reset-project
+npx expo start
