@@ -40,7 +40,7 @@ export default function App() {
         }}
       />
       <Button
-        title="retar"
+        title="Restar"
         onPress={()=>{
           let resultado = parseInt(valor1)-parseInt(valor2);
           setResultado(resultado);
