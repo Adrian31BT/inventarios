@@ -4,6 +4,7 @@ import { useState } from 'react';
 
 export default function App() {
 
+  dolares = 1;
   const [dolares, setDolares] = useState(0);
   const [resultado, setResultado] = useState(0);
   

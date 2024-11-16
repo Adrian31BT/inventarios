@@ -1,5 +1,5 @@
 npx create-expo-app@latest MiPrimerProyecto
-npx create-expo-app@latest MiPrimerProyecto --template blank@latest
+npx create-expo-app@latest Convertidor --template blank@latest
 
 cd MiPrimerProyecto
 npx create-expo-app MiPrimerProyecto

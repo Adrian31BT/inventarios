@@ -20,9 +20,7 @@ export default function App() {
       <TextInput 
         style = {styles.cajaTexto}
         value={apellido}
-        onChangeText={(txt)=>{
-          setApellido(txt);
-        }}
+        onChangeText={()=>{}}
       />
       <Button
         title="Saludar"
