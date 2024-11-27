@@ -1,7 +1,21 @@
 npx create-expo-app@latest MiPrimerProyecto
-npx create-expo-app@latest Convertidor --template blank@latest
+npx create-expo-app@latest Notas --template blank@latest
 
 cd MiPrimerProyecto
 npx create-expo-app MiPrimerProyecto
 npm run reset-project
 npx expo start
+
+https://reactnavigation.org/docs/getting-started
+Instalacion Navigation
+npm install @react-navigation/native
+npx expo install react-native-screens react-native-safe-area-context
+npm install @react-navigation/native-stack
+
+https://reactnativeelements.com/docs/installation
+Instalacion de RNE
+npm install @rneui/themed @rneui/base
+npm install react-native-vector-icons
+
+Iconos
+https://oblador.github.io/react-native-vector-icons/
