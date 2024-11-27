@@ -2,7 +2,6 @@ import { StyleSheet, Text, View, FlatList, TouchableHighlight } from 'react-nati
 import { getGrades } from '../services/GradeServices';
 import { FAB } from '@rneui/base';
 import { ListItem, Avatar } from '@rneui/themed'
-import { ListItemChevron } from '@rneui/base/dist/ListItem/ListItem.Chevron';
 import { useState } from 'react';
 
 export const ListGrades = ({ navigation }) => {
@@ -32,7 +31,7 @@ export const ListGrades = ({ navigation }) => {
       <ListItem.Content>
         <ListItem.Subtitle>{nota.grade}</ListItem.Subtitle>
       </ListItem.Content>
-      <ListItemChevron/>
+      <ListItem.Chevron/>
     </ListItem>
     </TouchableHighlight>
   }

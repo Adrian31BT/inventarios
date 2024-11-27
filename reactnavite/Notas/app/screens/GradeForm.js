@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 import { Input, Button } from '@rneui/base'
 import { useState } from 'react';
 import { saveGrade, updateGrade } from '../services/GradeServices';
@@ -18,8 +18,8 @@ export const GradeForm = ({navigation, route}) => {
         gradeR = route.params.objNota.grade;
     }
 
-    const [subject, setSubjet] = useState(subjectR);
-    const [grade, setGrade] = useState(gradeR==null?null:gradeR.toString());
+    const [subject, setSubject] = useState(subjectR==null?null:subjectR+"");
+    const [grade, setGrade] = useState(gradeR==null?null:gradeR+""); //aqui
 
     const [errorSubject, setErrorSubject] = useState();
     const [errorGrade, setErrorGrade] = useState();
@@ -33,9 +33,8 @@ export const GradeForm = ({navigation, route}) => {
             if(isNew){
                 saveGrade({subject:subject, grade:grade});
             }else{
-                updateGrade({subject:subject, grade:grade});
+                updateGrade({subject:subject, grade:grade}); 
             }
-            
             navigation.goBack();
             route.params.fnRefresh();
         } 
@@ -56,7 +55,7 @@ export const GradeForm = ({navigation, route}) => {
     return <View style={styles.container}>
         <Input 
             value={subject}
-            onChangeText={setSubjet}
+            onChangeText={setSubject}
             placeholder='Ejemplo: Matemáticas'
             label='Materia'
             errorMessage={errorSubject}
