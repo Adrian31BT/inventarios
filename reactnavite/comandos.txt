@@ -1,5 +1,5 @@
 npx create-expo-app@latest MiPrimerProyecto
-npx create-expo-app@latest Notas --template blank@latest
+npx create-expo-app@latest EjemploNotas --template blank@latest
 
 cd MiPrimerProyecto
 npx create-expo-app MiPrimerProyecto
@@ -19,3 +19,42 @@ npm install react-native-vector-icons
 
 Iconos
 https://oblador.github.io/react-native-vector-icons/
+
+
+
+Drawer Navigation
+npm install @react-navigation/drawer
+npm install react-native-reanimated
+npm install react-native-safe-area-context
+npm install react-native-gesture-handler
+
+babel.config.js
+
+import 'react-native-gesture-handler';
+import { createDrawerNavigator } from "react-navigation/drawer";
+
+npm i @react-native/babel-preset --save-dev
+npm install --save-dev babel-plugin-module-resolver 
+
+module.exports = function(api) {
+    api.cache(true);
+    return {
+        presets: ['babel-preset-expo'],
+        plugins: [
+            [
+                "module-resolver",
+                {
+                    extensions:['.tsx','.ts','.js','.json']
+                }
+            ],
+            'react-native-reanimated/plugin'
+        ],
+    };
+};
+
+npm update
+expo start --clear
+
+
+https://reactnavigation.org/docs/bottom-tab-navigator/
+npm install @react-navigation/bottom-tabs
