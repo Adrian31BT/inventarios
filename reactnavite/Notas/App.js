@@ -93,6 +93,5 @@ export default function App() {
     <NavigationContainer>
       <DrawerNav/> 
     </NavigationContainer>
-  );
-  
+  );  
 }
